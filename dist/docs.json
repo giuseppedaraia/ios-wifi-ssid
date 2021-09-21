@@ -1,0 +1,23 @@
+{
+  "api": {
+    "name": "iOSWifiSSIDPlugin",
+    "slug": "ioswifissidplugin",
+    "docs": "",
+    "tags": [],
+    "methods": [
+      {
+        "name": "getWifiSSID",
+        "signature": "() => any",
+        "parameters": [],
+        "returns": "any",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [],
+        "slug": "getwifissid"
+      }
+    ],
+    "properties": []
+  },
+  "interfaces": [],
+  "enums": []
+}
