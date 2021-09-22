@@ -18,7 +18,7 @@ public class iOSWifiSSIDPlugin: CAPPlugin {
     }
     */
 
-    @objc func getWifiSSID() -> String {
+    @objc func getWifiSSID(_ call: CAPPluginCall) -> String {
         return implementation.getWifiSSID()
     }
 }
