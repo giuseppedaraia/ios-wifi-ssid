@@ -11,7 +11,9 @@ export class iOSWifiSSIDWeb extends WebPlugin implements iOSWifiSSIDPlugin {
   }
   */
 
-  async getWifiSSID(): Promise<string | null> {
-    return "No WiFi detected";
+  async getWifiSSID(): Promise<{ ssid: string | null }> {
+    return {
+      ssid: "No WiFi detected"
+    };
   }
 }

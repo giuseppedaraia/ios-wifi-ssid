@@ -27,50 +27,51 @@ import Capacitor
         }
     }
 
-    @objc func getWifiSSID() -> String {
-        return self.updateWiFi()
+    public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedWhenInUse {
+            updateWiFi();
+        }
     }
-    
+
+    @objc func getWifiSSID(_ call: CAPPluginCall){
+        call.resolve([
+            "ssid": updateWiFi(),
+        ]);
+    }
+
     var locationManager = CLLocationManager()
-    
+
     var currentNetworkInfos: Array<WifiInfo>? {
         get {
             return SSID.fetchNetworkInfo()
         }
     }
-    
-    func updateWiFi() -> String {
+
+    func updateWiFi()->String {
         if let ssid = currentNetworkInfos?.first?.ssid {
-            
-            NSLog("SSID => %@", ssid);
-        
             return ssid;
         } else {
             return "null";
         }
     }
-    
-    
 
 
     public class SSID {
         class func fetchNetworkInfo() -> [WifiInfo]? {
-        
-            var wifiInfos = [WifiInfo]()
-            if let interfaces: NSArray = CNCopySupportedInterfaces() {
-           
-                for interface in interfaces {
-                    let interfaceName = interface as! String
-               
-                    var wifiInfo = WifiInfo(interface: interfaceName,success: false,ssid: nil)
-                    if let dict = CNCopyCurrentNetworkInfo(interfaceName as CFString) as NSDictionary? {
+             if let interfaces: NSArray = CNCopySupportedInterfaces() {
+                 var wifiInfos = [WifiInfo]()
+                 for interface in interfaces {
+                     let interfaceName = interface as! String
+                     var wifiInfo = WifiInfo(interface: interfaceName,success: false,ssid: nil)
+                     if let dict = CNCopyCurrentNetworkInfo(interfaceName as CFString) as NSDictionary? {
                         wifiInfo.success = true
                         wifiInfo.ssid = dict[kCNNetworkInfoKeySSID as String] as? String
-                    }
+                     }
                     wifiInfos.append(wifiInfo)
-                }
-            }
+                 }
             return wifiInfos
+         }
+         return nil
         }
     }
 
