@@ -1,6 +1,6 @@
 {
   "name": "ios-wifi-ssid",
-  "version": "0.0.1",
+  "version": "0.1.1",
   "description": "Ionic capacitor plugin to get WiFi SSID on iOS",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
